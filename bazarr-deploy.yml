@@ -1,0 +1,61 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: bazarr
+  labels:
+    app: bazarr
+    part-of: bazarr
+  annotations:
+    keel.sh/policy: force
+    keel.sh/trigger: poll
+    keel.sh/pollSchedule: "@hourly"
+    keel.sh/match-tag: true
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bazarr
+      part-of: bazarr
+  template:
+    metadata:
+      labels:
+        app: bazarr
+        part-of: bazarr
+    spec:
+      containers:
+      - name: bazarr
+        image: ghcr.io/linuxserver/bazarr:latest
+        ports:
+        - name: bazarr
+          containerPort: 6767
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Europe/Paris"
+        - name: UMASK
+          value: "022"
+        volumeMounts:
+        - name: bazarr
+          mountPath: /config
+        - name: series
+          mountPath: /series
+        - name: animes
+          mountPath: /animes
+        - name: movies
+          mountPath: /movies
+      volumes:
+      - name: bazarr
+        persistentVolumeClaim:
+          claimName: bazarr
+      - name: series
+        persistentVolumeClaim:
+          claimName: series
+      - name: animes
+        persistentVolumeClaim:
+          claimName: animes
+      - name: movies
+        persistentVolumeClaim:
+          claimName: movies
