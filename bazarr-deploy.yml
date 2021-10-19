@@ -46,6 +46,11 @@ spec:
           mountPath: /animes
         - name: movies
           mountPath: /movies
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 128Mi
       volumes:
       - name: bazarr
         persistentVolumeClaim:
