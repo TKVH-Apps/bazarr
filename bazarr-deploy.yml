@@ -48,9 +48,19 @@ spec:
           mountPath: /movies
         resources:
           limits:
-            memory: 256Mi
-          requests:
             memory: 128Mi
+          requests:
+            memory: 64Mi
+        readinessProbe:
+          tcpSocket:
+            port: bazarr
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: bazarr
+          initialDelaySeconds: 15
+          periodSeconds: 20
       volumes:
       - name: bazarr
         persistentVolumeClaim:
