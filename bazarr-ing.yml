@@ -16,10 +16,11 @@ spec:
       - path: /
         pathType: Prefix
         backend:
+        backend:
           service:
-            name: bazarr
+            name: ak-outpost-proxy01
             port:
-              number: 6767
+              number: 9000
   tls:
   - hosts:
     - <path:apps-kv/data/bazarr/config#HOST>
