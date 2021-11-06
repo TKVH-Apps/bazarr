@@ -6,3 +6,4 @@ resources:
   - bazarr-svc.yml
   - bazarr-pvc.yml
   - bazarr-ing.yml
+  - bazarr-ns.yml
