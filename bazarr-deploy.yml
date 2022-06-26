@@ -43,9 +43,9 @@ spec:
           mountPath: /movies
         resources:
           limits:
-            memory: 200Mi
+            memory: 500Mi
           requests:
-            memory: 150Mi
+            memory: 450Mi
         readinessProbe:
           tcpSocket:
             port: bazarr
